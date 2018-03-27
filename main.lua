@@ -1,7 +1,6 @@
 -----------------------------------------------------------------------------------------
---
--- main.lua
---
+-- Created by: Mouaffak Koubeisy
+-- Created on: March 26th 2018
 -----------------------------------------------------------------------------------------
 local dayTextField = native.newTextField( display.contentCenterX , display.contentCenterY - 400, 450, 75 )
 dayTextField.id = "day textField"
@@ -17,6 +16,14 @@ local ageField = display.newText( " How old are you? ", display.contentCenterX ,
 ageField.id = "age textField"
 ageField:setFillColor( 1, 1, 1 )
 
+local freeField = display.newText( "", display.contentCenterX , display.contentCenterY + 500, native.systemFont, 85 )
+freeField.id = "free textField"
+freeField:setFillColor( 1, 1, 1 )
+
+local payField = display.newText( "", display.contentCenterX , display.contentCenterY + 500, native.systemFont, 85 )
+payField.id = "pay textField"
+payField:setFillColor( 1, 1, 1 )
+
 local calculateButton = display.newImageRect( "./assets/sprites/enterButton.jpg", 425, 251 )
 calculateButton.x = display.contentCenterX
 calculateButton.y = display.contentCenterY
@@ -27,15 +34,13 @@ local day
 
 local function calculateButtonTouch( event )
 
-	age = ageTextField.text
+	age = tonumber(ageTextField.text)
 	day = dayTextField.text
 
-	if day == "tuesday" or "thursday" or if age <21 and >12 then
-		calculateButton.alpha = 0.0
-		ageField.alpha = 0.0
-		ageTextField.alpha = 0.0
-		chooseDayField = 0.0
-		
+	if (day == "tuesday" or day == "thursday") or (age < 21 and age > 12) then
+        freeField.text = " Mueseum is free! "
+	else payField.text = " Pay to go to the museum "
+	end
 
     return true
 end
